@@ -1,7 +1,7 @@
 # Important Links:
 [Jira Board](https://teamanythinggoes.atlassian.net/jira/software/projects/FIRST/boards/2)
 
-[Jira Guide (Video is coming soon)](https://university.atlassian.com/student/path/815443-jira-fundamentals)
+[Jira Guide](https://university.atlassian.com/student/path/815443-jira-fundamentals)
 
 Miro: **TBA**
 
@@ -29,6 +29,8 @@ Alex - 2D Artist
 
 Asher Ruvinov (Ash) - Scrum Master/Assistant Producer
 
+# Decided Game Concept
+[Banana](https://docs.google.com/document/d/13ZDSmDvx6JyWdaIlvT8ZOviGD89c06LR70E8uSRrZK4/edit)
 # Game ideas and Reasonable Scope References:
 [Flying Garden](https://docs.google.com/document/d/1fRorUNaKnd6dkbJRKSTZ_1kKpW7Z0rLDRsH9HoRijJ0/edit)
 
