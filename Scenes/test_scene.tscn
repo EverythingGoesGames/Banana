@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://fgqmqx2yxu7f"]
+
+[ext_resource type="Script" path="res://Scripts/Movement.cs" id="1_jllfj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbh2w"]
+size = Vector2(97, 108)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37ctj"]
+size = Vector2(30, 20)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ledge" type="Polygon2D" parent="." groups=["ledge"]]
+position = Vector2(0, 500)
+scale = Vector2(1, 0.213)
+offset = Vector2(-70, 0)
+polygon = PackedVector2Array(70, 0, 163, 1, 165, 110, 78, 108)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="ledge"]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ledge/RigidBody2D"]
+position = Vector2(48.5, 55)
+shape = SubResource("RectangleShape2D_hbh2w")
+one_way_collision = true
+
+[node name="characterplaceholder" type="CharacterBody2D" parent="."]
+process_mode = 3
+position = Vector2(0, 480)
+up_direction = Vector2(0, 1)
+script = ExtResource("1_jllfj")
+
+[node name="Polygon2D" type="Polygon2D" parent="characterplaceholder"]
+polygon = PackedVector2Array(4, 1, 30, 1, 31, 20, 3, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="characterplaceholder"]
+position = Vector2(17, 10)
+shape = SubResource("RectangleShape2D_37ctj")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-4.70526, 500)
+scale = Vector2(4.70526, 1)
