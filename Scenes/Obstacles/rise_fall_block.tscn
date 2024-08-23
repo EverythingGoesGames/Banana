@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://c6gl7l0vmwndi"]
+
+[ext_resource type="Texture2D" uid="uid://b02l6iubkutas" path="res://Assets/SmallTimedPlatorm.png" id="1_jlpdr"]
+[ext_resource type="Script" path="res://Scripts/Obstacles/RiseFallBlock.cs" id="1_nn3qn"]
+
+[sub_resource type="Curve2D" id="Curve2D_w7unk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 342, -1)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f40p3"]
+size = Vector2(128, 84)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_22e45"]
+size = Vector2(128.02, 9.02916)
+
+[sub_resource type="Animation" id="Animation_ec0dl"]
+resource_name = "Move"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_7ahix"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hqcjs"]
+_data = {
+"Move": SubResource("Animation_ec0dl"),
+"RESET": SubResource("Animation_7ahix")
+}
+
+[node name="Path2D" type="Path2D"]
+curve = SubResource("Curve2D_w7unk")
+script = ExtResource("1_nn3qn")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+position = Vector2(-1, 0)
+rotation = -0.00291544
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+texture = ExtResource("1_jlpdr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_f40p3")
+
+[node name="Area2D" type="Area2D" parent="AnimatableBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D/Area2D"]
+position = Vector2(0.118059, -42.6427)
+shape = SubResource("RectangleShape2D_22e45")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(-1, 0)
+rotation = -0.00291544
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+remote_path = NodePath("../../AnimatableBody2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hqcjs")
+}
