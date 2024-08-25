@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://fgqmqx2yxu7f"]
+[gd_scene load_steps=7 format=3 uid="uid://fgqmqx2yxu7f"]
 
 [ext_resource type="Script" path="res://Scripts/Movement.cs" id="1_jllfj"]
+[ext_resource type="PackedScene" uid="uid://cpop1b2qh2wx3" path="res://Scenes/Obstacles/platform_spitter.tscn" id="3_w3w7v"]
+[ext_resource type="PackedScene" uid="uid://cys0up5x5rdvv" path="res://Scenes/Obstacles/small_gear_block.tscn" id="4_d38q2"]
+[ext_resource type="PackedScene" uid="uid://bc7imvptdgbp3" path="res://Scenes/Obstacles/block_dropper.tscn" id="4_l3ljj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hbh2w"]
 size = Vector2(97, 108)
@@ -40,3 +43,13 @@ shape = SubResource("RectangleShape2D_37ctj")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-4.70526, 500)
 scale = Vector2(4.70526, 1)
+
+[node name="StaticBody2D" parent="." instance=ExtResource("3_w3w7v")]
+position = Vector2(-386, 440)
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("4_l3ljj")]
+position = Vector2(-74, 227)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("4_d38q2")]
+position = Vector2(-76, 440)
+collision_layer = 4

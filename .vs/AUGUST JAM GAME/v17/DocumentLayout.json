@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "D:\\Github\\Banana\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\risefallblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\risefallblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\slidingblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\slidingblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\movement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\movement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\gearplatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\gearplatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\timeblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\timeblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\gearplatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\gearplatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\risefallblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\risefallblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,31 +35,43 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "SlidingBlock.cs",
+              "DocumentMoniker": "D:\\Github\\Banana\\Scripts\\Obstacles\\SlidingBlock.cs",
+              "RelativeDocumentMoniker": "Scripts\\Obstacles\\SlidingBlock.cs",
+              "ToolTip": "D:\\Github\\Banana\\Scripts\\Obstacles\\SlidingBlock.cs",
+              "RelativeToolTip": "Scripts\\Obstacles\\SlidingBlock.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwCMAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-25T04:15:56.037Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "RiseFallBlock.cs",
               "DocumentMoniker": "D:\\Github\\Banana\\Scripts\\Obstacles\\RiseFallBlock.cs",
               "RelativeDocumentMoniker": "Scripts\\Obstacles\\RiseFallBlock.cs",
               "ToolTip": "D:\\Github\\Banana\\Scripts\\Obstacles\\RiseFallBlock.cs",
               "RelativeToolTip": "Scripts\\Obstacles\\RiseFallBlock.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T17:59:52.588Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-23T17:59:52.588Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "TimeBlock.cs",
               "DocumentMoniker": "D:\\Github\\Banana\\Scripts\\Obstacles\\TimeBlock.cs",
               "RelativeDocumentMoniker": "Scripts\\Obstacles\\TimeBlock.cs",
               "ToolTip": "D:\\Github\\Banana\\Scripts\\Obstacles\\TimeBlock.cs",
               "RelativeToolTip": "Scripts\\Obstacles\\TimeBlock.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAgwC4AAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAALgAAAAAAAAAAAAuwNYAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-23T17:42:37.763Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "GearPlatform.cs",
               "DocumentMoniker": "D:\\Github\\Banana\\Scripts\\Obstacles\\GearPlatform.cs",
               "RelativeDocumentMoniker": "Scripts\\Obstacles\\GearPlatform.cs",
@@ -73,9 +89,10 @@
               "RelativeDocumentMoniker": "Scripts\\Movement.cs",
               "ToolTip": "D:\\Github\\Banana\\Scripts\\Movement.cs",
               "RelativeToolTip": "Scripts\\Movement.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T17:03:49.672Z"
+              "WhenOpened": "2024-08-23T17:03:49.672Z",
+              "EditorCaption": ""
             }
           ]
         }

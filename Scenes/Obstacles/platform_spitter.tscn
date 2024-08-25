@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpop1b2qh2wx3"]
+
+[ext_resource type="Texture2D" uid="uid://b02l6iubkutas" path="res://Assets/SmallTimedPlatorm.png" id="1_k5pp8"]
+[ext_resource type="Script" path="res://Scripts/Obstacles/SlidingBlock.cs" id="2_x261n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqy6o"]
+size = Vector2(128, 84)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7scq"]
+size = Vector2(98, 21.5)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0.973479, 0, 1)
+texture = ExtResource("1_k5pp8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_eqy6o")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(49, 0)
+collision_layer = 2
+collision_mask = 4
+slide_on_ceiling = false
+script = ExtResource("2_x261n")
+x_dir = 1
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+modulate = Color(0.494118, 0, 0.501961, 1)
+position = Vector2(3.8147e-06, -5.96046e-08)
+scale = Vector2(0.763672, 0.255952)
+texture = ExtResource("1_k5pp8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_y7scq")

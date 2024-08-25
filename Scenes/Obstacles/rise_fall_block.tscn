@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://b02l6iubkutas" path="res://Assets/SmallTimedPlatorm.png" id="1_jlpdr"]
 [ext_resource type="Script" path="res://Scripts/Obstacles/RiseFallBlock.cs" id="1_nn3qn"]
 
-[sub_resource type="Curve2D" id="Curve2D_w7unk"]
+[sub_resource type="Curve2D" id="Curve2D_j7jh2"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 342, -1)
+"points": PackedVector2Array(0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 311, 0)
 }
 point_count = 2
 
@@ -53,12 +53,10 @@ _data = {
 }
 
 [node name="Path2D" type="Path2D"]
-curve = SubResource("Curve2D_w7unk")
+curve = SubResource("Curve2D_j7jh2")
 script = ExtResource("1_nn3qn")
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
-position = Vector2(-1, 0)
-rotation = -0.00291544
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
 texture = ExtResource("1_jlpdr")
@@ -73,11 +71,15 @@ position = Vector2(0.118059, -42.6427)
 shape = SubResource("RectangleShape2D_22e45")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2(-1, 0)
-rotation = -0.00291544
+position = Vector2(165.4, 0)
+progress = 166.4
+rotates = false
+cubic_interp = false
+loop = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
 remote_path = NodePath("../../AnimatableBody2D")
+use_global_coordinates = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
