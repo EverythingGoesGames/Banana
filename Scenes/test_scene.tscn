@@ -5,39 +5,35 @@
 [ext_resource type="PackedScene" uid="uid://cys0up5x5rdvv" path="res://Scenes/Obstacles/small_gear_block.tscn" id="4_d38q2"]
 [ext_resource type="PackedScene" uid="uid://bc7imvptdgbp3" path="res://Scenes/Obstacles/block_dropper.tscn" id="4_l3ljj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbh2w"]
-size = Vector2(97, 108)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5kohn"]
+size = Vector2(255.5, 115)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_37ctj"]
-size = Vector2(30, 20)
+size = Vector2(30, 21)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="ledge" type="Polygon2D" parent="." groups=["ledge"]]
-position = Vector2(0, 500)
-scale = Vector2(1, 0.213)
-offset = Vector2(-70, 0)
-polygon = PackedVector2Array(70, 0, 163, 1, 165, 110, 78, 108)
+position = Vector2(-70, 502)
+polygon = PackedVector2Array(69, -2, 322, -2, 318, 57, 323, 109, 78, 108)
 
-[node name="RigidBody2D" type="RigidBody2D" parent="ledge"]
-position = Vector2(-1, 0)
+[node name="StaticBody2D" type="StaticBody2D" parent="ledge"]
+position = Vector2(72, -4)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ledge/RigidBody2D"]
-position = Vector2(48.5, 55)
-shape = SubResource("RectangleShape2D_hbh2w")
-one_way_collision = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ledge/StaticBody2D"]
+position = Vector2(125.25, 58.5)
+shape = SubResource("RectangleShape2D_5kohn")
 
 [node name="characterplaceholder" type="CharacterBody2D" parent="."]
 process_mode = 3
-position = Vector2(0, 480)
-up_direction = Vector2(0, 1)
+position = Vector2(0, 469.915)
 script = ExtResource("1_jllfj")
 
 [node name="Polygon2D" type="Polygon2D" parent="characterplaceholder"]
 polygon = PackedVector2Array(4, 1, 30, 1, 31, 20, 3, 20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="characterplaceholder"]
-position = Vector2(17, 10)
+position = Vector2(17, 10.26)
 shape = SubResource("RectangleShape2D_37ctj")
 
 [node name="Camera2D" type="Camera2D" parent="."]
