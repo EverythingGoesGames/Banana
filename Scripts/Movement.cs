@@ -7,11 +7,12 @@ public partial class Movement : CharacterBody2D
     public delegate void HitEventHandler();
 
     
-    float Speed = 1000;
+    float Speed = 5;
     private const float Gravity = 500.0f;
     private const float jumpHeight = 6050.0f;
     public Vector2 velocity = Vector2.Zero;
-    public float targetXVelocity = 1000f;
+    public float targetXVelocity = 10f;
+    public Vector2 targetVelocity = new Vector2(1000,0);
     public bool onFloor = false;
 
     // Called when the node enters the scene tree for the first time.
@@ -21,15 +22,20 @@ public partial class Movement : CharacterBody2D
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _PhysicsProcess(double delta)
+    public override void _Process(double delta)
     {
         
-        if (!IsOnFloor())
-        {
             velocity.Y += Vector2.Down.Y * Gravity * (float)delta;
             //Add timer
             var TimeSinceWalkedOff = Time.GetUnixTimeFromSystem();
-            if (Time.GetUnixTimeFromSystem() - TimeSinceWalkedOff < 2)
+            if (IsOnFloor())
+            {
+                TimeSinceWalkedOff += Time.GetUnixTimeFromSystem();
+                onFloor = true;
+            }
+            else
+            {
+            if (Time.GetUnixTimeFromSystem() - TimeSinceWalkedOff < .2)
             {
                 onFloor = true;
             }
@@ -37,52 +43,36 @@ public partial class Movement : CharacterBody2D
             {
                 onFloor = false;
             }
-        }
-        
-         
-        // The player's movement vector.
+
+            }
 
         if (Input.IsActionPressed("move_right"))
         {
-           if (velocity.X < targetXVelocity)
-            {
-                velocity.X += 300;
-                Speed += 100;
-            }
-            else
-            {
-                velocity.X = 1000;
-            }
-            
+            velocity.X += velocity.MoveToward(targetVelocity, 10).X *Speed;
+            Speed += 100 * (float) delta;
         }
 
         if (Input.IsActionPressed("move_left"))
         {
-            if (velocity.X > targetXVelocity)
-            {
-                velocity.X -= 300;
-                Speed += 100;
-            }
-            else
-            {
-                velocity.X = -1000;
-            }
+            velocity.X += velocity.MoveToward(-targetVelocity, 10).X * Speed;
+            Speed += 100 * (float)delta;
         }
         if (!Input.IsAnythingPressed())
-        {
-            velocity = velocity.MoveToward(new Vector2(0, 0), -62);
+        { 
+            velocity = velocity.MoveToward(new Vector2(0, Gravity), 500) *Speed;
+            Speed = 5;
         }
 
         velocity = velocity.Normalized();
 
 
-        Velocity = velocity * (float)delta * Speed;
+        Velocity = velocity * Speed;
         MoveAndSlide();
         //Causes possiblity of infinte jump
         //Could turn this bug into a feature and have jump timing
         if (Input.IsActionPressed("jump") && (IsOnFloor() || onFloor))
         {
-            velocity.Y = -jumpHeight *Speed;
+            velocity.Y = -jumpHeight * Speed;
         }
 
     }
