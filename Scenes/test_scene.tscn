@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://fgqmqx2yxu7f"]
+[gd_scene load_steps=9 format=3 uid="uid://fgqmqx2yxu7f"]
 
 [ext_resource type="Script" path="res://Scripts/Movement.cs" id="1_jllfj"]
-[ext_resource type="PackedScene" uid="uid://cpop1b2qh2wx3" path="res://Scenes/Obstacles/platform_spitter.tscn" id="3_w3w7v"]
+[ext_resource type="PackedScene" uid="uid://rndh3w1bex6i" path="res://Scenes/Obstacles/railings.tscn" id="2_bpr80"]
 [ext_resource type="PackedScene" uid="uid://cys0up5x5rdvv" path="res://Scenes/Obstacles/small_gear_block.tscn" id="4_d38q2"]
 [ext_resource type="PackedScene" uid="uid://bc7imvptdgbp3" path="res://Scenes/Obstacles/block_dropper.tscn" id="4_l3ljj"]
+[ext_resource type="PackedScene" uid="uid://gn4sl1835ytn" path="res://Scenes/Obstacles/small_time_block.tscn" id="5_enckd"]
+[ext_resource type="PackedScene" uid="uid://cpop1b2qh2wx3" path="res://Scenes/Obstacles/platform_spitter.tscn" id="6_nuwjb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5kohn"]
 size = Vector2(255.5, 115)
@@ -40,12 +42,17 @@ shape = SubResource("RectangleShape2D_37ctj")
 position = Vector2(-4.70526, 500)
 scale = Vector2(4.70526, 1)
 
-[node name="StaticBody2D" parent="." instance=ExtResource("3_w3w7v")]
-position = Vector2(-386, 440)
-
-[node name="StaticBody2D2" parent="." instance=ExtResource("4_l3ljj")]
-position = Vector2(-74, 227)
+[node name="StaticBody2D" parent="." instance=ExtResource("2_bpr80")]
+position = Vector2(-119, 422)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("4_d38q2")]
-position = Vector2(-76, 440)
-collision_layer = 4
+position = Vector2(-123, 421)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("5_enckd")]
+position = Vector2(478, 261)
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("4_l3ljj")]
+position = Vector2(-275, 193)
+
+[node name="StaticBody2D3" parent="." instance=ExtResource("6_nuwjb")]
+position = Vector2(-541, 420)

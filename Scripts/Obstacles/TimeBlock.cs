@@ -9,19 +9,14 @@ public partial class TimeBlock : CharacterBody2D
 	[Export]
 	private float countdown = 1.0f;
 
-	[Export]
-	private float maxRewindTime = 4.0f;
-
 	private float time = 0.0f;
 
 	private AnimationPlayer player;
 	private Area2D area;
 	private Label label;
+	private CollisionShape2D collision;
 
 	private Label label2; // Testing purpose
-	private float tmpTimer = 0.0f;
-
-	private Area2D area2;
 
 	// Initiate the process of destroying the time block
 	private bool timerRunning = false;
@@ -35,7 +30,7 @@ public partial class TimeBlock : CharacterBody2D
 	private string state = "Idle";
 
 	private bool animationDelay = false;
-	private const int HISTORYLIMIT = 40;
+	private const int HISTORYLIMIT = 240;
 	private const float RECORDMARKER = 0.1f;
 
 	LinkedList<Rewind> rewindHistory = new LinkedList<Rewind>();
@@ -46,6 +41,8 @@ public partial class TimeBlock : CharacterBody2D
 		public float time;
 		public bool timerRunning;
 		public bool done;
+		public bool collsionEnabled;
+		public bool areaEnabled;
 		public string forwardBackward;  // This is for the animation player
 	};
 
@@ -58,7 +55,9 @@ public partial class TimeBlock : CharacterBody2D
 		player.AnimationFinished += (body) => AnimationFinished();
 
 		area = GetNode<Area2D>("Area2D");
-		area.BodyEntered += (body) => InitiateDestruction((CharacterBody2D)body);  // Maybe to prevent issue that some other body (or object) other than the player will trigger the destruction animation effect
+		area.BodyEntered += (body) => InitiateDestruction((CharacterBody2D)body);
+
+		collision = GetNode<CollisionShape2D>("CollisionShape2D");
 
 		label = GetNode<Label>("Label");
 		label.Text = GD.VarToStr(countdown);
@@ -73,8 +72,6 @@ public partial class TimeBlock : CharacterBody2D
 		switch(state)
 		{
 			case "Idle":
-				timeRewind += (float)delta;
-
 				if (timerRunning == true)
 				{
 					time += (float)delta;
@@ -92,54 +89,54 @@ public partial class TimeBlock : CharacterBody2D
 					done = true;
 					timerRunning = false;
 					forwardBackward = "play";
-					player.Call(forwardBackward, "Destroyed"); // When storing play or play_backwards, possible that I may need to store the opposite of what the animation is currently playing
+					player.Call(forwardBackward, "Destroyed");
+					collision.Disabled = true;
+					area.Monitoring = false;
 				}
+
+				label2.Text = "Not Rewinding";
 
 				// Time rewind mechanic
-				if (timeRewind > RECORDMARKER)
-				{
-					timeRewind = 0.0f;
-
-					RecordHistory();
-				}
+				RecordHistory();
 				break;
 			case "Activated":
-				time += (float)delta;
 
-				tmpTimer += (float)delta;
-				label2.Text = tmpTimer.ToString("N1");
+				Rewind record = rewindHistory.First();
 
-				if ((time > RECORDMARKER))
+				// Assign essential properties for rewind effect
+				time = record.time;
+				done = record.done;
+				collision.Disabled = record.collsionEnabled;
+				area.Monitoring = record.areaEnabled;
+				timerRunning = record.timerRunning;
+				forwardBackward = record.forwardBackward;
+
+				rewindHistory.RemoveFirst();
+
+
+				if (record.forwardBackward.Equals("play_backwards"))
 				{
-					Rewind record = rewindHistory.First();
-
-					time = record.time;
-					done = record.done;
-					timerRunning = record.timerRunning;
-					forwardBackward = record.forwardBackward;
-
-					rewindHistory.RemoveFirst();
-
-					time = 0.0f;
-
-					if (!player.IsPlaying())
-					{
-						if (record.forwardBackward.Equals("play_backwards"))
-						{
-							player.Call(forwardBackward, "Destroyed");
-						}
-						else if ((rewindHistory.Count == 0) && (record.forwardBackward.Equals("play")))
-						{
-							player.Call(forwardBackward, "Destroyed");
-						}
-						else if ((rewindHistory.Count == 0) && (record.forwardBackward.Equals("do_nothing")))
-						{
-							player.Stop();
-						}
-					}
-
-					//GD.Print(rewindHistory.Count, ": ", record.time, " ", record.forwardBackward);
+					player.Call(forwardBackward, "Destroyed");
 				}
+				else if ((rewindHistory.Count == 0) && (record.forwardBackward.Equals("play")))
+				{
+					player.Call(forwardBackward, "Destroyed");
+				}
+				else if ((rewindHistory.Count == 0) && (record.forwardBackward.Equals("do_nothing")))
+				{
+					player.Stop();
+				}
+
+				if (!player.IsPlaying() && (timerRunning))
+				{
+					float num = Mathf.Clamp(countdown - time, 0.0f, countdown);
+					label.Text = num.ToString("N1");
+					//GD.Print(time);
+				}
+
+				//GD.Print(rewindHistory.Count, ": ", record.time, " ", record.forwardBackward);
+
+				label2.Text = "Rewinding";
 
 				if (rewindHistory.Count == 0)
 				{
@@ -171,7 +168,6 @@ public partial class TimeBlock : CharacterBody2D
 	private void AnimationFinished()
 	{
 		time = 0.0f;
-		label.Text = "Destroyed";
 		forwardBackward = "do_nothing";
 	}
 
@@ -193,6 +189,8 @@ public partial class TimeBlock : CharacterBody2D
 		Rewind timeline;
 		timeline.time = time;
 		timeline.done = done;
+		timeline.collsionEnabled = collision.Disabled;
+		timeline.areaEnabled = area.Monitoring;
 		timeline.timerRunning = timerRunning;
 
 		if (forwardBackward.Equals("do_nothing"))
