@@ -28,7 +28,7 @@ shape = SubResource("RectangleShape2D_5kohn")
 
 [node name="characterplaceholder" type="CharacterBody2D" parent="."]
 process_mode = 3
-position = Vector2(0, 479)
+position = Vector2(0, 469.915)
 script = ExtResource("1_jllfj")
 
 [node name="Polygon2D" type="Polygon2D" parent="characterplaceholder"]
