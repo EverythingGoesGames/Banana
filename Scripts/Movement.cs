@@ -3,17 +3,18 @@ using System;
 
 public partial class Movement : CharacterBody2D
 {
-	[Signal]
-	public delegate void HitEventHandler();
-
-	
+	[Export]
 	float Speed = 50;
+	[Export]
 	private const float Gravity = 950.0f;
+	[Export]
 	private const float jumpHeight = 800.0f;
 	public Vector2 velocity = Vector2.Zero;
 	public Vector2 targetVelocity = new Vector2(1000,0);
 	public bool onFloor = false;
 	private double TimeSinceWalkedOff = 0;
+	private float timeHeld = 0.0f;
+	private float maxHoldTime = 0.1f;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -47,16 +48,30 @@ public partial class Movement : CharacterBody2D
 
 		if (Input.IsActionPressed("move_right"))
 		{
-			velocity.X += velocity.MoveToward(targetVelocity, 10).X *Speed;
-			Speed += 100 * (float) delta;
-            GD.Print(velocity.X);
+            if (velocity.X < 0)
+            {
+                velocity.X = -velocity.X/2;
+            }
+			else
+			{
+                velocity.X += velocity.MoveToward(targetVelocity, 10).X * Speed;
+                Speed += 100 * (float)delta;
+            }
+            
         }
 
 		if (Input.IsActionPressed("move_left"))
 		{
-            GD.Print("left");
-            velocity.X += velocity.MoveToward(-targetVelocity, 10).X * Speed;
-			Speed += 100 * (float)delta;
+			if (velocity.X > 0)
+			{
+				velocity.X = -velocity.X/2;
+			}
+			else
+			{
+                velocity.X += velocity.MoveToward(-targetVelocity, 10).X * Speed;
+                Speed += 100 * (float)delta;
+            }
+            
 		}
 		if (!Input.IsAnythingPressed())
 		{ 
@@ -68,16 +83,32 @@ public partial class Movement : CharacterBody2D
 
         velocity = velocity.Normalized();
 
-        if (Input.IsActionPressed("jump") && (IsOnFloor() || onFloor))
+        if (Input.IsActionJustPressed("jump") && (IsOnFloor() || onFloor) && timeHeld < maxHoldTime)
         {
+			timeHeld += (float)delta;
             velocity.Y = -jumpHeight;
         }
-        else if (!Input.IsActionPressed("jump") && (!IsOnFloor() || !onFloor))
+        else if (!Input.IsActionPressed("jump") && (!IsOnFloor() && !onFloor))
         {
-			velocity.X /= 3;
+			velocity.X /= 2;
             velocity.Y = Gravity * (float)delta;
-			GD.Print("not on ground");
+			timeHeld = 0.0f;
         }
+		else if (Input.IsActionPressed("jump"))
+		{
+			timeHeld += (float)delta;
+			GD.Print(timeHeld);
+			if (timeHeld >= maxHoldTime)
+			{
+				velocity.Y = Gravity * (float)delta;
+            }
+		}
+		else
+		{
+			velocity.Y = Gravity * (float)delta;
+			timeHeld = 0.0f;
+		}
+
 		velocity.X *= Speed;
         Velocity = velocity;
 		MoveAndSlide();
