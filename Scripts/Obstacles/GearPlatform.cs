@@ -1,29 +1,20 @@
 using Godot;
-using System;
 using System.Collections.Generic;
+using SynchronousStates;
 
-public partial class GearPlatform : CharacterBody2D
+public partial class GearPlatform : SyncCharObject
 {
-	[Export]
-	public float platformSpeed = 50.0f;
-
-	[Export]
-	public int dir = 1;
-
 	private RayCast2D railChecker;
 	private float time = 0.00f;
-	private string state = "Idle";
+	
 
 	// Time rewound effect
-	LinkedList<Rewind> rewindHistory = new LinkedList<Rewind>();
-	private const int HISTORYLIMIT = 240;
+	private LinkedList<RewindData> rewindHistory = new LinkedList<RewindData>();
 
-	private Label label; // For testing rewind effect
-
-	public struct Rewind
+	struct RewindData
 	{
 		public Vector2 pos;
-		public int dir;
+		public int xDir;
 		public float time;
 		public Vector2 rayCastPos;
 	}
@@ -33,17 +24,20 @@ public partial class GearPlatform : CharacterBody2D
 		// The railChecker is intended to detect both ends of the rail.
 		railChecker = GetNode<RayCast2D>("RailChecker");
 		Vector2 tmp = railChecker.Position;
-		tmp.X = tmp.X * dir;
+		tmp.X = tmp.X * xDir;
 		railChecker.Position = tmp;
 
-		label = GetNode<Label>("Label");
+		syncData.SetHistoryLimit(syncData.GetRewindLength());
+		syncData.SetRewindArea(GetNode<Area2D>("RewindArea"));
+
+		debugText = GetNode<Label>("DebugText");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		switch(state)
+		switch(syncData.GetTimeState())
 		{
-			case "Idle":
+			case TimeStates.Idle:
 				if (!railChecker.IsColliding())
 				{
 					// This will pause the platform to give the player some time to get on it.
@@ -51,43 +45,37 @@ public partial class GearPlatform : CharacterBody2D
 
 					PlatformMovement(0.0f);
 
+					MoveAndSlide();
+
 					// After a certain amount of time has passed, platform will continue moving in the opposite direction and reset time.
 					if (time > 1.00)
 					{
 						time = 0.00f;
-						dir *= -1;
+						xDir *= -1;
 
 						Vector2 tmp = railChecker.Position;
 						tmp.X = tmp.X * -1;
 						railChecker.Position = tmp;
 
-						PlatformMovement(platformSpeed);
+						PlatformMovement(speed);
+						
+						MoveAndSlide();
 					}
 				}
 				else
 				{
-					PlatformMovement(platformSpeed);
+					PlatformMovement(speed);
+					MoveAndSlide();
 				}
-
-				label.Text = "Not Rewinding";
 
 				RecordHistory();
 
-
-				if (Input.IsActionJustPressed("rewind"))
-				{
-					state = "Activated";
-				}
-
-
 				break;
-			case "Activated":
-				Rewind record = rewindHistory.First.Value;
-
-				label.Text = "Rewinding";
+			case TimeStates.Actvated:
+				RewindData record = rewindHistory.First.Value;
 
 				Position = record.pos;
-				dir = record.dir;
+				xDir = record.xDir;
 				time = record.time;
 				railChecker.Position = record.rayCastPos;
 
@@ -95,38 +83,27 @@ public partial class GearPlatform : CharacterBody2D
 
 				if (rewindHistory.Count == 0)
 				{
-					state = "Exited";
+					syncData.SetTimeState(TimeStates.Idle);
 				}
 				break;
-			case "Exited":
-				state = "Idle";
+			case TimeStates.Exited:
 				break;
 		}
 
-		
-	}
-
-	private void PlatformMovement(float speed)
-	{
-		Vector2 velocity = Velocity;
-
-		velocity.X = speed * dir;
-
-		Velocity = velocity;
-		MoveAndSlide();
+		debugText.Text = "Rewind: " + syncData.GetRewindLength().ToString() + "s";
 	}
 
 	private void RecordHistory()
 	{
-		if (rewindHistory.Count == HISTORYLIMIT)
+		if (rewindHistory.Count >= syncData.GetHistoryLimit())
 		{
 			rewindHistory.RemoveLast();
 		}
 
-		Rewind timeline;
+		RewindData timeline;
 
 		timeline.pos = Position;
-		timeline.dir = dir;
+		timeline.xDir = xDir;
 		timeline.time = time;
 		timeline.rayCastPos = railChecker.Position;
 

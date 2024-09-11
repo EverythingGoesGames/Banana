@@ -1,13 +1,15 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using SynchronousStates;
 
-public partial class TimeBlock : CharacterBody2D
+public partial class TimeBlock : StaticBody2D
 {
 	[Export]
 	private float countdown = 1.0f;
+
+	[Export]
+	SynchronousData syncData;
 
 	private float time = 0.0f;
 
@@ -16,23 +18,16 @@ public partial class TimeBlock : CharacterBody2D
 	private Label label;
 	private CollisionShape2D collision;
 
-	private Label label2; // Testing purpose
+	private Label debugText; // Testing purpose
 
 	// Initiate the process of destroying the time block
 	private bool timerRunning = false;
 	private bool done = false;
+	private bool disppeared = false;
 	private string forwardBackward = "do_nothing";
 
 
 	// Rewind feature
-	private float timeRewind = 0.0f;
-	private float tmpRewind = 0.0f;
-	private string state = "Idle";
-
-	private bool animationDelay = false;
-	private const int HISTORYLIMIT = 240;
-	private const float RECORDMARKER = 0.1f;
-
 	LinkedList<Rewind> rewindHistory = new LinkedList<Rewind>();
 	
 
@@ -41,9 +36,10 @@ public partial class TimeBlock : CharacterBody2D
 		public float time;
 		public bool timerRunning;
 		public bool done;
+		public bool disappeared;
 		public bool collsionEnabled;
 		public bool areaEnabled;
-		public string forwardBackward;  // This is for the animation player
+		public string forwardBackward;
 	};
 
 
@@ -51,6 +47,9 @@ public partial class TimeBlock : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		syncData.SetHistoryLimit(syncData.GetRewindLength());
+		syncData.SetRewindArea(GetNode<Area2D>("RewindArea"));
+
 		player = GetNode<AnimationPlayer>("AnimationPlayer");
 		player.AnimationFinished += (body) => AnimationFinished();
 
@@ -62,26 +61,29 @@ public partial class TimeBlock : CharacterBody2D
 		label = GetNode<Label>("Label");
 		label.Text = GD.VarToStr(countdown);
 
-		label2 = GetNode<Label>("Label2");
-
+		debugText = GetNode<Label>("DebugText");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		switch(state)
+		switch(syncData.GetTimeState())
 		{
-			case "Idle":
+			case TimeStates.Idle:
 				if (timerRunning == true)
 				{
 					time += (float)delta;
 				}
 
 				// Display the time on the block with 1 decimal place
-				if (!done)
+				if ((!done) && (!disppeared))
 				{
 					float num = Mathf.Clamp(countdown - time, 0.0f, countdown);
 					label.Text = num.ToString("N1");
+				}
+				else
+				{
+					label.Text = "";
 				}
 
 				if (time > countdown)
@@ -94,18 +96,23 @@ public partial class TimeBlock : CharacterBody2D
 					area.Monitoring = false;
 				}
 
-				label2.Text = "Not Rewinding";
+				// Testing the animation
+				if (Input.IsActionJustPressed("test"))
+				{
+					timerRunning = true;
+				}
 
 				// Time rewind mechanic
 				RecordHistory();
 				break;
-			case "Activated":
+			case TimeStates.Actvated:
 
 				Rewind record = rewindHistory.First();
 
 				// Assign essential properties for rewind effect
 				time = record.time;
 				done = record.done;
+				disppeared = record.disappeared;
 				collision.Disabled = record.collsionEnabled;
 				area.Monitoring = record.areaEnabled;
 				timerRunning = record.timerRunning;
@@ -118,62 +125,44 @@ public partial class TimeBlock : CharacterBody2D
 				{
 					player.Call(forwardBackward, "Destroyed");
 				}
+				else if ((rewindHistory.Count == 0) && (record.forwardBackward.Equals("play_backwards")))
+				{
+					forwardBackward ="play";
+					player.Call(forwardBackward, "Destroyed");
+				}
 				else if ((rewindHistory.Count == 0) && (record.forwardBackward.Equals("play")))
 				{
 					player.Call(forwardBackward, "Destroyed");
-				}
-				else if ((rewindHistory.Count == 0) && (record.forwardBackward.Equals("do_nothing")))
-				{
-					player.Stop();
 				}
 
 				if (!player.IsPlaying() && (timerRunning))
 				{
 					float num = Mathf.Clamp(countdown - time, 0.0f, countdown);
 					label.Text = num.ToString("N1");
-					//GD.Print(time);
 				}
-
-				//GD.Print(rewindHistory.Count, ": ", record.time, " ", record.forwardBackward);
-
-				label2.Text = "Rewinding";
 
 				if (rewindHistory.Count == 0)
 				{
-					state = "Exited";
+					syncData.SetTimeState(TimeStates.Idle);
 				}
 				break;
-			case "Exited":
-
-				state = "Idle";
-
+			case TimeStates.Exited:
 				break;
 		}
 
-
-
-		// Testing the animation
-		if (Input.IsActionJustPressed("test"))
-		{
-			timerRunning = true;
-		}
-
-		// Testing the rewind feature
-		if (Input.IsActionJustPressed("rewind"))
-		{
-			state = "Activated";
-		}
+		debugText.Text = "Rewind: " + syncData.GetRewindLength().ToString() + "s";
 	}
 
 	private void AnimationFinished()
 	{
 		time = 0.0f;
 		forwardBackward = "do_nothing";
+		disppeared = true;
 	}
 
 	private void InitiateDestruction(CharacterBody2D body)
 	{
-		if (body.CollisionLayer == 0)
+		if (body.CollisionLayer == 1)
 		{
 			timerRunning = true;
 		}
@@ -181,14 +170,24 @@ public partial class TimeBlock : CharacterBody2D
 
 	private void RecordHistory()
 	{
-		if (rewindHistory.Count >= HISTORYLIMIT)
+		if (rewindHistory.Count >= syncData.GetHistoryLimit())
 		{
-			rewindHistory.RemoveLast();
+			if (rewindHistory.Last.Value.disappeared)
+			{
+				rewindHistory.Clear();
+				syncData.SetTimeState(TimeStates.Exited);
+				return;
+			}
+			else
+			{
+				rewindHistory.RemoveLast();
+			}
 		}
 
 		Rewind timeline;
 		timeline.time = time;
 		timeline.done = done;
+		timeline.disappeared = disppeared;
 		timeline.collsionEnabled = collision.Disabled;
 		timeline.areaEnabled = area.Monitoring;
 		timeline.timerRunning = timerRunning;
@@ -207,10 +206,5 @@ public partial class TimeBlock : CharacterBody2D
 		}
 
 		rewindHistory.AddFirst(timeline);
-
-		string display = timeline.time + " " + timeline.done + " " + timeline.timerRunning + " " + timeline.forwardBackward;
-
-		//GD.Print(rewindHistory.Count, ": " , display);
-		//GD.Print(display);
 	}
 }

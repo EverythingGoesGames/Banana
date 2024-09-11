@@ -1,44 +1,25 @@
 using Godot;
-using System;
 using System.Collections.Generic;
+using SynchronousStates;
 
-public partial class SlidingBlock : CharacterBody2D
+public partial class SlidingBlock : SyncCharObject
 {
-	[Export]
-	private float speed = 50.0f;
-
-	[Export]
-	private int x_dir = 0;
-
-	[Export]
-	private int y_dir = 0;
-
-	[Export]
-	private float xDisplacement = 0.00f;
-
-	[Export]
-	private float yDisplacement = 0.00f;
-
-	private string state = "Idle";
-
-	LinkedList<Vector2> positionHistory = new LinkedList<Vector2>();
+	private LinkedList<Vector2> rewindHistory = new LinkedList<Vector2>();
 
 	public override void _Ready()
 	{
-		base._Ready();
+		syncData.SetHistoryLimit(syncData.GetHistoryLimit());
+		syncData.SetRewindArea(GetNode<Area2D>("RewindArea"));
+
+		debugText = GetNode<Label>("DebugText");
 	}
 
-	public override void _PhysicsProcess(double delta)
+    public override void _PhysicsProcess(double delta)
 	{
-		switch(state)
+		switch(syncData.GetTimeState())
 		{
-			case "Idle":
-				Vector2 velocity = Velocity;
-
-				velocity.X = x_dir;
-				velocity.Y = y_dir;
-
-				Velocity = velocity.Normalized() * speed;
+			case TimeStates.Idle:
+				PlatformMovement(speed);
 
 				KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
 
@@ -47,44 +28,42 @@ public partial class SlidingBlock : CharacterBody2D
 					QueueFree();
 				}
 
-				if (Input.IsActionJustPressed("rewind"))
-				{
-					state = "Activated";
-				}
-
 				RecordHistory();
 				break;
-			case "Activated":
-				GlobalPosition = positionHistory.First.Value;
-				positionHistory.RemoveFirst();
+			case TimeStates.Actvated:
+				GlobalPosition = rewindHistory.First.Value;
+				rewindHistory.RemoveFirst();
 
-				if (positionHistory.Count ==0)
+				if (rewindHistory.Count == 0)
 				{
-					state = "Exited";
+					syncData.SetTimeState(TimeStates.Idle);
 				}
 				break;
-			case "Exited":
-				state = "Idle";
+			case TimeStates.Exited:
 				break;
 		}
+
+		debugText.Text = "Rewind: " + syncData.GetRewindLength().ToString() + "s";
 	}
 
-	public void AdjustPosition(Vector2 pos)
+	public void AdjustPosition(Vector2 pos, float rotation)
 	{
-		pos.X = pos.X + xDisplacement;
-
-		pos.Y = pos.Y + yDisplacement;
-
 		GlobalPosition = pos;
+
+		if (rotation > 179.0f)
+		{
+			xDir *= -1;
+			yDir *= -1;
+		}
 	}
 
 	private void RecordHistory()
 	{
-		if (positionHistory.Count == 240)
+		if (rewindHistory.Count >= syncData.GetHistoryLimit())
 		{
-			positionHistory.RemoveLast();
+			rewindHistory.RemoveLast();
 		}
 
-		positionHistory.AddFirst(GlobalPosition);
+		rewindHistory.AddFirst(GlobalPosition);
 	}
 }

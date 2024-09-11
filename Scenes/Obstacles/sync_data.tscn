@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3fn4xb3hx11b"]
+
+[ext_resource type="Script" path="res://Scripts/Obstacles/SynchronousData.cs" id="1_kn5ls"]
+
+[node name="SyncData" type="Node"]
+script = ExtResource("1_kn5ls")

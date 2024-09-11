@@ -1,13 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://cys0up5x5rdvv"]
+[gd_scene load_steps=6 format=3 uid="uid://cys0up5x5rdvv"]
 
 [ext_resource type="Script" path="res://Scripts/Obstacles/GearPlatform.cs" id="1_1kfwe"]
+[ext_resource type="PackedScene" uid="uid://c3fn4xb3hx11b" path="res://Scenes/Obstacles/sync_data.tscn" id="2_b6tra"]
 [ext_resource type="Texture2D" uid="uid://b02l6iubkutas" path="res://Assets/SmallTimedPlatorm.png" id="2_eyhne"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_px2g6"]
 size = Vector2(128, 84)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txe0n"]
+size = Vector2(128, 84)
+
+[node name="SGearBlock" type="CharacterBody2D" node_paths=PackedStringArray("syncData")]
+collision_layer = 2
 script = ExtResource("1_1kfwe")
+syncData = NodePath("SyncData")
+xDir = 1
+
+[node name="SyncData" parent="." instance=ExtResource("2_b6tra")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_eyhne")
@@ -19,12 +28,13 @@ shape = SubResource("RectangleShape2D_px2g6")
 position = Vector2(15, -42)
 collision_mask = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="RailChecker"]
-scale = Vector2(0.0234375, 0.357143)
-texture = ExtResource("2_eyhne")
-
-[node name="Label" type="Label" parent="."]
+[node name="DebugText" type="Label" parent="."]
 offset_left = -21.0
 offset_top = -98.0
 offset_right = 19.0
 offset_bottom = -75.0
+
+[node name="RewindArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RewindArea"]
+shape = SubResource("RectangleShape2D_txe0n")

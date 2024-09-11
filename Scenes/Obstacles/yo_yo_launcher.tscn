@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=3 uid="uid://clywdpbemeng8"]
+
+[ext_resource type="Script" path="res://Scripts/Obstacles/YoYoLauncher.cs" id="1_62u28"]
+[ext_resource type="Texture2D" uid="uid://b02l6iubkutas" path="res://Assets/SmallTimedPlatorm.png" id="1_dfnxq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0aemp"]
+size = Vector2(128, 84)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ea7xa"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_vs2mt"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_m4uvn"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_xu0wi"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7rv4v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7j0p"]
+size = Vector2(50, 24)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dccyn"]
+radius = 128.413
+
+[node name="YoYoLauncher" type="Path2D" node_paths=PackedStringArray("area")]
+script = ExtResource("1_62u28")
+area = NodePath("Area2D")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+cubic_interp = false
+loop = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+remote_path = NodePath("../../AnimatableBody2D")
+update_rotation = false
+update_scale = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_dfnxq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_0aemp")
+
+[node name="PowerLevel" type="Node2D" parent="."]
+position = Vector2(-50, -47)
+
+[node name="Power1" type="Sprite2D" parent="PowerLevel"]
+modulate = Color(0, 1, 0, 0)
+position = Vector2(-1.04308e-06, 1.75)
+scale = Vector2(28, 3.5)
+texture = SubResource("CanvasTexture_ea7xa")
+
+[node name="Power2" type="Sprite2D" parent="PowerLevel"]
+modulate = Color(0, 0.596078, 0, 0)
+position = Vector2(-6.25849e-07, -2.5)
+scale = Vector2(28, 3)
+texture = SubResource("CanvasTexture_vs2mt")
+
+[node name="Power3" type="Sprite2D" parent="PowerLevel"]
+modulate = Color(0.929412, 0.929412, 0, 0)
+position = Vector2(-5.72205e-06, -6.5)
+scale = Vector2(28, -3)
+texture = SubResource("CanvasTexture_m4uvn")
+
+[node name="Power4" type="Sprite2D" parent="PowerLevel"]
+modulate = Color(0.87451, 0.458824, 0, 0)
+position = Vector2(9.53674e-07, -10.5)
+scale = Vector2(28, 3)
+texture = SubResource("CanvasTexture_xu0wi")
+
+[node name="Power5" type="Sprite2D" parent="PowerLevel"]
+modulate = Color(0.752941, 0, 0, 0)
+position = Vector2(-4.76837e-07, -14.5)
+scale = Vector2(28, 3)
+texture = SubResource("CanvasTexture_7rv4v")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+modulate = Color(0.482353, 1, 1, 1)
+position = Vector2(3.8147e-06, -5.06639e-07)
+scale = Vector2(0.390625, 0.285714)
+texture = ExtResource("1_dfnxq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_u7j0p")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_dccyn")

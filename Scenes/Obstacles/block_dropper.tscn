@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bc7imvptdgbp3"]
+[gd_scene load_steps=6 format=3 uid="uid://bc7imvptdgbp3"]
 
 [ext_resource type="Script" path="res://Scripts/Obstacles/TriggerObstacle.cs" id="1_3q0rs"]
 [ext_resource type="Texture2D" uid="uid://b02l6iubkutas" path="res://Assets/SmallTimedPlatorm.png" id="1_usphv"]
@@ -9,9 +9,14 @@ size = Vector2(128, 84)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcqf4"]
 size = Vector2(60, 60)
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_mbhfb"]
+radius = 124.0
+
+[node name="BlockDropper" type="StaticBody2D" node_paths=PackedStringArray("triggerArea")]
+collision_layer = 2
 script = ExtResource("1_3q0rs")
 path = "res://Scenes/Obstacles/block.tscn"
+triggerArea = NodePath("TriggerArea")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 1, 1, 1)
@@ -35,3 +40,8 @@ texture = ExtResource("1_usphv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("RectangleShape2D_mcqf4")
+
+[node name="TriggerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+shape = SubResource("CircleShape2D_mbhfb")

@@ -1,17 +1,30 @@
-[gd_scene load_steps=9 format=3 uid="uid://fgqmqx2yxu7f"]
+[gd_scene load_steps=12 format=3 uid="uid://fgqmqx2yxu7f"]
 
 [ext_resource type="Script" path="res://Scripts/Movement.cs" id="1_jllfj"]
 [ext_resource type="PackedScene" uid="uid://rndh3w1bex6i" path="res://Scenes/Obstacles/railings.tscn" id="2_bpr80"]
 [ext_resource type="PackedScene" uid="uid://cys0up5x5rdvv" path="res://Scenes/Obstacles/small_gear_block.tscn" id="4_d38q2"]
-[ext_resource type="PackedScene" uid="uid://bc7imvptdgbp3" path="res://Scenes/Obstacles/block_dropper.tscn" id="4_l3ljj"]
-[ext_resource type="PackedScene" uid="uid://gn4sl1835ytn" path="res://Scenes/Obstacles/small_time_block.tscn" id="5_enckd"]
-[ext_resource type="PackedScene" uid="uid://cpop1b2qh2wx3" path="res://Scenes/Obstacles/platform_spitter.tscn" id="6_nuwjb"]
+[ext_resource type="PackedScene" uid="uid://bc7imvptdgbp3" path="res://Scenes/Obstacles/block_dropper.tscn" id="6_rk180"]
+[ext_resource type="PackedScene" uid="uid://c6gl7l0vmwndi" path="res://Scenes/Obstacles/rise_fall_block.tscn" id="7_olf7a"]
+[ext_resource type="PackedScene" uid="uid://clywdpbemeng8" path="res://Scenes/Obstacles/yo_yo_launcher.tscn" id="8_4sw0k"]
+[ext_resource type="PackedScene" uid="uid://gn4sl1835ytn" path="res://Scenes/Obstacles/small_time_block.tscn" id="8_qxh5x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5kohn"]
 size = Vector2(255.5, 115)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_37ctj"]
 size = Vector2(30, 21)
+
+[sub_resource type="Curve2D" id="Curve2D_6d3ka"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2, 237)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_6l2vv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 39, -3, 0, 0, 0, 0, 272, -3)
+}
+point_count = 2
 
 [node name="Node2D" type="Node2D"]
 
@@ -21,6 +34,8 @@ polygon = PackedVector2Array(69, -2, 322, -2, 318, 57, 323, 109, 78, 108)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ledge"]
 position = Vector2(72, -4)
+collision_layer = 4
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ledge/StaticBody2D"]
 position = Vector2(125.25, 58.5)
@@ -29,6 +44,7 @@ shape = SubResource("RectangleShape2D_5kohn")
 [node name="characterplaceholder" type="CharacterBody2D" parent="."]
 process_mode = 3
 position = Vector2(0, 469.915)
+collision_mask = 7
 script = ExtResource("1_jllfj")
 
 [node name="Polygon2D" type="Polygon2D" parent="characterplaceholder"]
@@ -43,16 +59,21 @@ position = Vector2(-4.70526, 30.085)
 scale = Vector2(4.70526, 1)
 
 [node name="StaticBody2D" parent="." instance=ExtResource("2_bpr80")]
-position = Vector2(-119, 422)
+position = Vector2(-344, 388)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("4_d38q2")]
-position = Vector2(-123, 421)
+[node name="SGearBlock" parent="." instance=ExtResource("4_d38q2")]
+position = Vector2(-345, 388)
 
-[node name="CharacterBody2D2" parent="." instance=ExtResource("5_enckd")]
-position = Vector2(478, 261)
+[node name="BlockDropper" parent="." instance=ExtResource("6_rk180")]
+position = Vector2(79, 311)
 
-[node name="StaticBody2D2" parent="." instance=ExtResource("4_l3ljj")]
-position = Vector2(-275, 193)
+[node name="RiseFallBlock" parent="." instance=ExtResource("7_olf7a")]
+position = Vector2(-74, 542)
+curve = SubResource("Curve2D_6d3ka")
 
-[node name="StaticBody2D3" parent="." instance=ExtResource("6_nuwjb")]
-position = Vector2(-541, 420)
+[node name="YoYoLauncher" parent="." instance=ExtResource("8_4sw0k")]
+position = Vector2(324, 588)
+curve = SubResource("Curve2D_6l2vv")
+
+[node name="STimeBlock" parent="." instance=ExtResource("8_qxh5x")]
+position = Vector2(-214, 542)

@@ -7,20 +7,32 @@
       "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\slidingblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\movement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\movement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\gearplatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\gearplatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\risefallblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\risefallblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\timeblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\timeblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\risefallblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\risefallblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\gearplatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\gearplatform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\synchronousdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\synchronousdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\synccharobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\synccharobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\triggerobstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\triggerobstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|d:\\github\\banana\\scripts\\obstacles\\yoyolauncher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{948ECFDF-0DA0-426A-AC3E-85E38FDB4D41}|August Jam Game.csproj|solutionrelative:scripts\\obstacles\\yoyolauncher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,8 +42,57 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "YoYoLauncher.cs",
+              "DocumentMoniker": "D:\\Github\\Banana\\Scripts\\Obstacles\\YoYoLauncher.cs",
+              "RelativeDocumentMoniker": "Scripts\\Obstacles\\YoYoLauncher.cs",
+              "ToolTip": "D:\\Github\\Banana\\Scripts\\Obstacles\\YoYoLauncher.cs",
+              "RelativeToolTip": "Scripts\\Obstacles\\YoYoLauncher.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-11T00:55:45.801Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SyncCharObject.cs",
+              "DocumentMoniker": "D:\\Github\\Banana\\Scripts\\Obstacles\\SyncCharObject.cs",
+              "RelativeDocumentMoniker": "Scripts\\Obstacles\\SyncCharObject.cs",
+              "ToolTip": "D:\\Github\\Banana\\Scripts\\Obstacles\\SyncCharObject.cs",
+              "RelativeToolTip": "Scripts\\Obstacles\\SyncCharObject.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-10T23:33:44.162Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TriggerObstacle.cs",
+              "DocumentMoniker": "D:\\Github\\Banana\\Scripts\\Obstacles\\TriggerObstacle.cs",
+              "RelativeDocumentMoniker": "Scripts\\Obstacles\\TriggerObstacle.cs",
+              "ToolTip": "D:\\Github\\Banana\\Scripts\\Obstacles\\TriggerObstacle.cs",
+              "RelativeToolTip": "Scripts\\Obstacles\\TriggerObstacle.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwAAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-10T23:04:31.126Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SynchronousData.cs",
+              "DocumentMoniker": "D:\\Github\\Banana\\Scripts\\Obstacles\\SynchronousData.cs",
+              "RelativeDocumentMoniker": "Scripts\\Obstacles\\SynchronousData.cs",
+              "ToolTip": "D:\\Github\\Banana\\Scripts\\Obstacles\\SynchronousData.cs",
+              "RelativeToolTip": "Scripts\\Obstacles\\SynchronousData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-10T22:38:33.748Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -40,58 +101,48 @@
               "RelativeDocumentMoniker": "Scripts\\Obstacles\\SlidingBlock.cs",
               "ToolTip": "D:\\Github\\Banana\\Scripts\\Obstacles\\SlidingBlock.cs",
               "RelativeToolTip": "Scripts\\Obstacles\\SlidingBlock.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwCMAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAowCkAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-25T04:15:56.037Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "RiseFallBlock.cs",
               "DocumentMoniker": "D:\\Github\\Banana\\Scripts\\Obstacles\\RiseFallBlock.cs",
               "RelativeDocumentMoniker": "Scripts\\Obstacles\\RiseFallBlock.cs",
               "ToolTip": "D:\\Github\\Banana\\Scripts\\Obstacles\\RiseFallBlock.cs",
               "RelativeToolTip": "Scripts\\Obstacles\\RiseFallBlock.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAowEIAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T17:59:52.588Z"
+              "WhenOpened": "2024-08-23T17:59:52.588Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "TimeBlock.cs",
               "DocumentMoniker": "D:\\Github\\Banana\\Scripts\\Obstacles\\TimeBlock.cs",
               "RelativeDocumentMoniker": "Scripts\\Obstacles\\TimeBlock.cs",
               "ToolTip": "D:\\Github\\Banana\\Scripts\\Obstacles\\TimeBlock.cs",
               "RelativeToolTip": "Scripts\\Obstacles\\TimeBlock.cs",
-              "ViewState": "AgIAALgAAAAAAAAAAAAuwNYAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAAgwJgAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T17:42:37.763Z"
+              "WhenOpened": "2024-08-23T17:42:37.763Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "GearPlatform.cs",
               "DocumentMoniker": "D:\\Github\\Banana\\Scripts\\Obstacles\\GearPlatform.cs",
               "RelativeDocumentMoniker": "Scripts\\Obstacles\\GearPlatform.cs",
               "ToolTip": "D:\\Github\\Banana\\Scripts\\Obstacles\\GearPlatform.cs",
               "RelativeToolTip": "Scripts\\Obstacles\\GearPlatform.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAIwFwAAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T17:29:06.343Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Movement.cs",
-              "DocumentMoniker": "D:\\Github\\Banana\\Scripts\\Movement.cs",
-              "RelativeDocumentMoniker": "Scripts\\Movement.cs",
-              "ToolTip": "D:\\Github\\Banana\\Scripts\\Movement.cs",
-              "RelativeToolTip": "Scripts\\Movement.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-23T17:03:49.672Z",
+              "WhenOpened": "2024-08-23T17:29:06.343Z",
               "EditorCaption": ""
             }
           ]

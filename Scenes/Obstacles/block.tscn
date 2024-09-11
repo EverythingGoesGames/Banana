@@ -1,17 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://csqh1hwrwnpe"]
+[gd_scene load_steps=6 format=3 uid="uid://csqh1hwrwnpe"]
 
 [ext_resource type="Script" path="res://Scripts/Obstacles/SlidingBlock.cs" id="1_vn4oh"]
+[ext_resource type="PackedScene" uid="uid://c3fn4xb3hx11b" path="res://Scenes/Obstacles/sync_data.tscn" id="2_snd1i"]
 [ext_resource type="Texture2D" uid="uid://b02l6iubkutas" path="res://Assets/SmallTimedPlatorm.png" id="2_u0mpx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4i03"]
 size = Vector2(60, 60)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jxlc"]
+size = Vector2(60, 60)
+
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("syncData")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_vn4oh")
-y_dir = 1
-yDisplacement = 30.0
+syncData = NodePath("SyncData")
+yDir = 1
+
+[node name="SyncData" parent="." instance=ExtResource("2_snd1i")]
+rewindLength = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.469, 0.714)
@@ -19,3 +26,14 @@ texture = ExtResource("2_u0mpx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_v4i03")
+
+[node name="RewindArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RewindArea"]
+shape = SubResource("RectangleShape2D_7jxlc")
+
+[node name="DebugText" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -61.0
+offset_right = 20.0
+offset_bottom = -38.0
